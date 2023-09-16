@@ -1,0 +1,42 @@
+body {
+    background-color: #d7e0ea;
+}
+
+.information-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.username-container {
+    margin-top: 5px;
+}
+
+.information-container {
+    margin-top: 25px;
+}
+
+.transaction-container {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 25px;
+}
+
+.transaction-form {
+    display: flex;
+}
+
+.transaction-form div {
+    margin-right: 15px;
+}
+
+.transaction-form div:last-child {
+    margin-right: 0px;
+}
+
+.table-container {
+    display: flex;
+    justify-content: space-evenly;
+
+    margin-top: 50px;
+}
