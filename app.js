@@ -1,5 +1,5 @@
 function updateTables(user) {
-    //gets form inputs
+    //getting table and calculated information
     const incomeTable = document.getElementById("income-table").querySelector("tbody");
     const expenseTable = document.getElementById("expense-table").querySelector("tbody");
     const savingTable = document.getElementById("saving-table").querySelector("tbody");
@@ -65,7 +65,7 @@ function handleTransactionFormSubmit(event) {
     //prevents the default form submission behavior
     event.preventDefault();
 
-    //gets form inputs
+    //getting form information
     const transactionType = transactionForm.querySelector("select").value;
     const description = transactionForm.querySelector("input[type='text']").value;
     const amount = parseFloat(transactionForm.querySelector("input[type='number']").value);
@@ -88,6 +88,59 @@ function handleTransactionFormSubmit(event) {
     transactionForm.reset();
 }
 
-//event listener
+//event listener for handleTransactionFormSubmit function
 const transactionForm = document.querySelector(".transaction-form");
 transactionForm.addEventListener("submit", handleTransactionFormSubmit);
+
+function handleRowClick(event) {
+    const clickedRow = event.target.closest("tr");
+
+    //exits the function if a row isn't clicked
+    if (!clickedRow) return;
+
+    clickedRow.classList.add("table-secondary");
+}
+
+//event listeners handleRowClick function
+document.getElementById("income-table").querySelector("tbody").addEventListener("click", handleRowClick);
+document.getElementById("expense-table").querySelector("tbody").addEventListener("click", handleRowClick);
+document.getElementById("saving-table").querySelector("tbody").addEventListener("click", handleRowClick);
+
+function clearHighlightedRows() {
+    const highlightedRows = document.querySelectorAll(".table-secondary");
+
+    highlightedRows.forEach(row => {
+        row.classList.remove("table-secondary");
+    });
+}
+
+//event listener for clearHighlightedRows function
+document.getElementById("clear-button").addEventListener("click", clearHighlightedRows);
+
+function deleteHighlightedRows() {
+    const highlightedRows = document.querySelectorAll(".table-secondary");
+
+    highlightedRows.forEach(row => {
+        const tableId = row.closest("table").id;
+
+        let transactionDescription = row.querySelector("td").textContent;
+        let transactionAmount = parseFloat(row.children[1].textContent);
+        let transactionDate = new Date(row.children[2].textContent);
+
+        if (tableId === "income-table") {
+            user.removeIncome(transactionDescription, transactionAmount, transactionDate);
+        } else if (tableId === "expense-table") {
+            user.removeExpense(transactionDescription, transactionAmount, transactionDate);
+        } else if (tableId === "saving-table") {
+            user.removeSaving(transactionDescription, transactionAmount, transactionDate);
+        }
+
+        row.remove();
+    });
+
+    updateTables(user);
+}
+
+
+//event listener for deleteHighlightedRows function
+document.getElementById("delete-button").addEventListener("click", deleteHighlightedRows);

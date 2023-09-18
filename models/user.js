@@ -17,7 +17,7 @@ class User {
         return this.username;
     }
 
-    //methods //these need input validation
+    //add methods
     addIncome(description, amount, date) {
         const income = new Transaction(description, amount, date);
         this.income.push(income);
@@ -36,5 +36,28 @@ class User {
         return saving;
     }
 
-    //calculate income expense savings methods
+    //remove methods
+    removeIncome(description, amount, date) {
+        this.income = this.income.filter(incomeTransaction => {
+            return !(incomeTransaction.description === description &&
+                incomeTransaction.amount === amount &&
+                incomeTransaction.date.toDateString() === date.toDateString());
+        });
+    }
+
+    removeExpense(description, amount, date) {
+        this.expense = this.expense.filter(expenseTransaction => {
+            return !(expenseTransaction.description === description &&
+                expenseTransaction.amount === amount &&
+                expenseTransaction.date.toDateString() === date.toDateString());
+        });
+    }
+
+    removeSaving(description, amount, date) {
+        this.saving = this.saving.filter(savingTransaction => {
+            return !(savingTransaction.description === description &&
+                savingTransaction.amount === amount &&
+                savingTransaction.date.toDateString() === date.toDateString());
+        });
+    }
 }

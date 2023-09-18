@@ -29,3 +29,10 @@
 - i did some styling to help out with some of the weirdness of the layout which actually helped me fix a few bugs.
 - i got most of everything working and even a bit of styling that really help the page look nicer.
 - the last two features i need for mvp is persistent data and a way to delete/edit previous entries.
+
+# 9/16
+
+- i finished setting up deletion of rows from the tables.
+- all the core functionality is done.
+- there are a few more things i can do at this stage to make the program look a bit prettier, but i think this is a good spot to stop for now.
+- i'll work on an edit feature or a 
